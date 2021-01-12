@@ -1,0 +1,94 @@
+.containerCourses {
+  display: grid;
+  place-items: center;
+  height: 100vh;
+  background: linear-gradient(to bottom, rgb(39, 66, 241), rgb(245, 240, 244));
+  overflow-y: scroll;
+}
+.contenttable {
+  width: 70%;
+  height: 90vh;
+}
+.table {
+  /* width: 70%; */
+  text-align: center;
+  border-collapse: collapse;
+  background-color: rgba(212, 198, 235, 0.884);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.25);
+}
+.table_colum1 {
+  width: 10%;
+  border: none;
+}
+.table_colum2 {
+  width: 15%;
+  border: none;
+}
+.table_colum3 {
+  width: 15%;
+  border: none;
+}
+.table_colum4 {
+  width: 15%;
+  border: none;
+}
+.table_colum5 {
+  width: 15%;
+  border: none;
+}
+.table_colum6 {
+  width: 30%;
+  border: none;
+}
+.headertable {
+  border: none;
+  background-color: rgb(124, 136, 248);
+  height: 40px;
+  color: #ffffff;
+}
+.rowbody {
+  border-bottom: 1px solid #ffffff;
+  height: 40px;
+}
+.btn_action {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+}
+.btn_update {
+  background-color: green;
+  outline: none;
+  border-radius: 5px;
+  border: none;
+  color: #ffffff;
+  font-size: 14px;
+}
+.btn_delete {
+  background-color: red;
+  outline: none;
+  border-radius: 5px;
+  border: none;
+  color: #ffffff;
+  font-size: 14px;
+}
+button {
+  outline: none;
+  border: none;
+}
+.directory {
+  color: #ffffff;
+  position: sticky;
+  top: 0;
+  font-size: 30px;
+  width: 100%;
+  background-color: rgb(39, 66, 241);
+  padding-top: 1vw;
+  padding-bottom: 1vw;
+  box-shadow: 0px 4px 3px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+}
+.directory .MuiSvgIcon-root {
+  color: #ffffff;
+  font-size: 30px;
+}
