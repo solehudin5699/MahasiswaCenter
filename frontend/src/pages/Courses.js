@@ -8,76 +8,28 @@ import { useHistory } from "react-router-dom";
 
 let data = [
   {
-    code: "ACACA",
-    period: 1,
+    code: "1A29B",
+    semester: 1,
     name: "Komputer",
     major: "Fisika",
   },
   {
-    code: "ACACA",
-    period: 1,
-    name: "Komputer",
+    code: "1A29C",
+    semester: 2,
+    name: "Energi",
     major: "Fisika",
   },
   {
-    code: "ACACA",
-    period: 1,
-    name: "Komputer",
+    code: "1A29D",
+    semester: 5,
+    name: "Material Lanjut",
     major: "Fisika",
   },
   {
-    code: "ACACA",
-    period: 1,
-    name: "Komputer",
-    major: "Fisika",
-  },
-  {
-    code: "ACACA",
-    period: 1,
-    name: "Komputer",
-    major: "Fisika",
-  },
-  {
-    code: "ACACA",
-    period: 1,
-    name: "Komputer",
-    major: "Fisika",
-  },
-  {
-    code: "ACACA",
-    period: 1,
-    name: "Komputer",
-    major: "Fisika",
-  },
-  {
-    code: "ACACA",
-    period: 1,
-    name: "Komputer",
-    major: "Fisika",
-  },
-  {
-    code: "ACACA",
-    period: 1,
-    name: "Komputer",
-    major: "Fisika",
-  },
-  {
-    code: "ACACA",
-    period: 1,
-    name: "Komputer",
-    major: "Fisika",
-  },
-  {
-    code: "ACACA",
-    period: 1,
-    name: "Komputer",
-    major: "Fisika",
-  },
-  {
-    code: "ACACA",
-    period: 1,
-    name: "Komputer",
-    major: "Fisika",
+    code: "1A29E",
+    semester: 1,
+    name: "Biologi Dasar",
+    major: "Biologi",
   },
 ];
 export default function Courses() {
@@ -110,7 +62,7 @@ export default function Courses() {
                 <tr className='rowbody'>
                   <td>{index + 1} </td>
                   <td>{item.code}</td>
-                  <td>{item.period}</td>
+                  <td>{item.semester}</td>
                   <td>{item.name}</td>
                   <td>{item.major}</td>
                   <td className='btn_action'>
