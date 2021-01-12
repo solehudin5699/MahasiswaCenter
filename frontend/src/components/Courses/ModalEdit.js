@@ -7,17 +7,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { Modal } from "react-bootstrap";
 import "./modal.css";
 
-export default function AddCourses(props) {
+export default function EditCourses(props) {
   const [matakuliah, setMatkul] = useState({
+    id: "",
     kode: "",
     matakuliah: "",
     semester: "",
     jurusanID: "",
   });
   const dispatch = useDispatch();
-  const { matkul } = useSelector((state) => state.matkul);
   const [loading, setLoading] = useState(false);
-  const handleAdd = () => {
+  const handleUpdate = () => {
     setLoading(true);
     let body = {
       kode: matakuliah.kode,
@@ -26,37 +26,22 @@ export default function AddCourses(props) {
       jurusanID: Number(matakuliah.jurusanID),
     };
     return axios
-      .post(`${process.env.REACT_APP_APIURL}/matakuliah/`, body)
+      .patch(
+        `${process.env.REACT_APP_APIURL}/matakuliah/${matakuliah.id}`,
+        body
+      )
       .then((res) => {
-        let jurusan;
-        switch (res.data.data.jurusanID) {
-          case 1:
-            jurusan = "Matematika";
-          case 2:
-            jurusan = "Kimia";
-          case 3:
-            jurusan = "Fisika";
-          case 4:
-            jurusan = "Biologi";
-          case 5:
-            jurusan = "Geofisika";
-          case 6:
-            jurusan = "Statistika";
-          case 7:
-            jurusan = "Teknik Elektro";
-          case 8:
-            jurusan = "Teknik Informatika";
-          case 9:
-            jurusan = "Farmasi";
-          case 10:
-            jurusan = "Teknik Pangan";
-          default:
-            null;
-        }
-        const newMatkul = { ...res.data.data, jurusan };
-        const data = [...matkul, newMatkul];
-        dispatch(keepMatkul(data));
-        setLoading(false);
+        axios
+          .get(`${process.env.REACT_APP_APIURL}/matakuliah/`)
+          .then((res) => {
+            const data = res.data.data;
+            dispatch(keepMatkul(data));
+            setLoading(false);
+          })
+          .catch((err) => {
+            console.log(err);
+            setLoading(false);
+          });
       })
       .catch((err) => {
         console.log(err);
@@ -68,6 +53,17 @@ export default function AddCourses(props) {
       props.onHide(false);
     }
   }, [loading]);
+  useEffect(() => {
+    if (props.show) {
+      setMatkul({
+        id: props.data.id,
+        kode: props.data.kode,
+        matakuliah: props.data.matakuliah,
+        semester: props.data.semester,
+        jurusanID: props.data.jurusanID,
+      });
+    }
+  }, [props.show]);
   return (
     <Modal
       {...props}
@@ -78,7 +74,7 @@ export default function AddCourses(props) {
       <Modal.Body>
         <div className='attodo_container'>
           <div className='at_line linetitle'>
-            <h5>Tambah Matakuliah</h5>
+            <h5>Perbarui Data</h5>
           </div>
           <div className='at_line'>
             <div className='at_label'>
@@ -87,6 +83,7 @@ export default function AddCourses(props) {
             <div className='at_input'>
               <input
                 type='text'
+                value={matakuliah.kode}
                 onChange={(e) =>
                   setMatkul({ ...matakuliah, kode: e.target.value })
                 }
@@ -100,6 +97,7 @@ export default function AddCourses(props) {
             <div className='at_input'>
               <input
                 type='text'
+                value={matakuliah.semester}
                 onChange={(e) =>
                   setMatkul({ ...matakuliah, semester: e.target.value })
                 }
@@ -113,6 +111,7 @@ export default function AddCourses(props) {
             <div className='at_input'>
               <input
                 type='text'
+                value={matakuliah.matakuliah}
                 onChange={(e) =>
                   setMatkul({ ...matakuliah, matakuliah: e.target.value })
                 }
@@ -126,16 +125,14 @@ export default function AddCourses(props) {
             <div className='at_input'>
               <select
                 name='category'
-                placeholder='Jurusan'
+                value={props.show ? matakuliah.jurusanID : null}
                 onChange={(e) =>
                   setMatkul({ ...matakuliah, jurusanID: e.target.value })
                 }
                 name='jurusanID'
                 required>
                 <optgroup label='Jurusan'>
-                  <option value='1' selected>
-                    Matematika
-                  </option>
+                  <option value='1'>Matematika</option>
                   <option value='2'>Kimia</option>
                   <option value='3'>Fisika</option>
                   <option value='4'>Biologi</option>
@@ -154,17 +151,20 @@ export default function AddCourses(props) {
             <button
               className='at_btnCancel marginRight15'
               style={{ outline: "none" }}
-              onClick={() => props.onHide(false)}>
+              onClick={() => {
+                props.onHide(false);
+                setLoading(false);
+              }}>
               Batal
             </button>
             <button
               className='at_btnAdd'
               style={{ outline: "none" }}
-              onClick={handleAdd}>
+              onClick={handleUpdate}>
               {loading ? (
                 <i className='fa fa-spinner fa-spin fa-2x fa-fw'></i>
               ) : (
-                "Tambah"
+                "Perbarui"
               )}
             </button>
           </div>
